@@ -19,16 +19,16 @@ let getWeatherForCity = function (city) {
         q: createWeatherQuery(city),
         format: "json"
     })
-    .then((data) => {
-        this.setState({
-            weatherData: data.query.results.channel
-        });
-    })
-    .catch((error) => {
-        this.setState({
-            weatherError: true
+        .then((data) => {
+            this.setState({
+                weatherData: data.query.results.channel
+            });
         })
-    })
+        .catch((error) => {
+            this.setState({
+                weatherError: true
+            })
+        })
 };
 
 export default React.createClass({
@@ -39,16 +39,17 @@ export default React.createClass({
     },
 
     componentDidMount: function () {
-        // Initial load should get the weather for my city
-        getWeatherForCity.bind(this, "calgary")();
-
         // Add voice actions for mumble
         this.props.mumble.addCommand("weather", "Show me weather for (.+)", (city) => {
             getWeatherForCity.bind(this, city)();
         });
+
+        // Initial load should get the weather for my city
+        getWeatherForCity.bind(this, "calgary")();
     },
 
     componentWillUnmount: function () {
+        // remove the voice commands when the component leaves the DOM
         this.props.mumble.removeCommand("weather");
     },
 
@@ -60,23 +61,24 @@ export default React.createClass({
             if (forecast) {
                 forecastItems = forecast.map((data) => {
                     return <Forecast key={ keyID() } tempHigh={ data.high || "N/A" }
-                        tempLow={ data.low || "N/A" } date={ data.date || "N/A" } code={ data.code || "N/A" }/>;
+                                     tempLow={ data.low || "N/A" } date={ data.date || "N/A" }
+                                     code={ data.code || "N/A" }/>;
                 });
             }
             return (
-                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}} runOnMount={true}>
-                <div className="ui center aligned grid">
-                    <div className="two column row">
-                        <div className="column">
-                            <i style={{fontSize: "56px"}} className={weatherData.item.condition.code?`wi wi-yahoo-${weatherData.item.condition.code}`:`wi wi-na`}></i>
+                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "bounceOut"}} runOnMount={true}>
+                    <div className="ui center aligned grid">
+                        <div className="two column row">
+                            <div className="column">
+                                <i style={{fontSize: "56px"}} className={weatherData.item.condition.code?`wi wi-yahoo-${weatherData.item.condition.code}`:`wi wi-na`}></i>
+                            </div>
+                            <div className="column">
+                                <div className="ui huge header">{ weatherData.item.condition.temp || "N/A" }&deg;C</div>
+                                <div className="ui huge header">{ weatherData.location.city || "N/A" }</div>
+                            </div>
                         </div>
-                        <div className="column">
-                            <div className="ui huge header">{ weatherData.item.condition.temp || "N/A" }&deg;C</div>
-                            <div className="ui huge header">{ weatherData.location.city || "N/A" }</div>
-                        </div>
+                        {forecastItems}
                     </div>
-                    {forecastItems}
-                </div>
                 </VelocityTransitionGroup>
             );
         }
