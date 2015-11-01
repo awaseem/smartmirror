@@ -4,7 +4,7 @@ import Mumble from "mumble-js";
 
 let mumble = new Mumble({
     language: 'en-US',
-    debug: true
+    debug: false
 });
 
 mumble.start();

@@ -8,7 +8,15 @@ export default React.createClass({
     },
     render() {
         return (
-            <Weather/>
+            <div className="ui three column grid">
+                <div className="row">
+                    <div className="column"></div>
+                    <div className="column"></div>
+                    <div className="column">
+                        <Weather/>
+                    </div>
+                </div>
+            </div>
         )
     }
 });
