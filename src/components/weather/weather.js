@@ -1,6 +1,7 @@
 /**
  * Created by awaseem on 15-10-29.
  */
+
 import React from "react";
 import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
 import Config from "../../config/config";
@@ -66,7 +67,7 @@ export default React.createClass({
                 });
             }
             return (
-                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "bounceOut"}} runOnMount={true}>
+                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}} runOnMount={true}>
                     <div className="ui center aligned grid">
                         <div className="two column row">
                             <div className="column">

@@ -1,4 +1,5 @@
 import React from 'react';
+import Time from "./time/time";
 import Weather from "./weather/weather";
 
 export default React.createClass({
@@ -28,9 +29,10 @@ export default React.createClass({
         return (
             <div className="ui fluid container">
                 <div className="ui three column grid">
-                    <button onClick={this.turnOffWeather}>test</button>
                     <div className="row">
-                        <div className="column"></div>
+                        <div className="column">
+                            <Time/>
+                        </div>
                         <div className="column"></div>
                         <div className="column">
                             {weather}
