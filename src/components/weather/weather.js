@@ -4,7 +4,6 @@
 
 import React from "react";
 import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
-import Config from "../../config/config";
 import { Get } from "../../lib/request";
 import Forecast from "./forecast";
 import keyID from "../../lib/IdGen";

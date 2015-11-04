@@ -33,4 +33,14 @@ let Get = (url, jsonData) => {
         .then(jsonResponseMiddleware);
 };
 
-export { Get };
+let Post = (url, headers, data) => {
+    return fetch(url, {
+        method: "post",
+        headers: headers,
+        body: data
+    })
+        .then(statusMiddleware)
+        .then(jsonResponseMiddleware);
+};
+
+export { Get, Post };

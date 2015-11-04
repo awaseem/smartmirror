@@ -1,6 +1,7 @@
 import React from 'react';
 import Time from "./time/time";
 import Weather from "./weather/weather";
+import Spotify from "./spotify/spotify";
 
 export default React.createClass({
     getInitialState() {
@@ -33,7 +34,9 @@ export default React.createClass({
                         <div className="column">
                             <Time/>
                         </div>
-                        <div className="column"></div>
+                        <div className="column">
+                            <Spotify mumble={this.props.mumble}/>
+                        </div>
                         <div className="column">
                             {weather}
                         </div>

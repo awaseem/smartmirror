@@ -43,7 +43,7 @@
     "react-router": "^1.0.0-rc3",
     "require-dot-file": "^0.4.0",
     "semantic-ui": "^2.1.4",
-    "twitter-node-client": "0.0.6",
+    "spotify-web-api-js": "^0.15.0",
     "velocity-react": "^1.1.1",
     "yamljs": "^0.2.4"
   },
