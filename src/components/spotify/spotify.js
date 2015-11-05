@@ -22,6 +22,7 @@ export default React.createClass({
     componentDidMount: function () {
         let track;
         let mumble = this.props.mumble;
+
         mumble.addCommand("play track", "play (.+) by (.+)", (song, artist) => {
             this.spotifySearch.searchTracks(`artist:${artist} track:${song}`)
                 .then((data) => {
@@ -46,9 +47,10 @@ export default React.createClass({
                     console.error(error);
                 });
         });
+
         mumble.addCommand("stop track", "pause", () => {
-            if (track) {
-                track.pause();
+            if (this.currentTrack) {
+                this.currentTrack.pause();
                 this.setState({ trackPlaying: undefined });
             }
         });
@@ -56,6 +58,10 @@ export default React.createClass({
 
     componentWillUnmount: function () {
         let mumble = this.props.mumble;
+        if (this.currentTrack) {
+            this.currentTrack.pause();
+            this.setState({ trackPlaying: undefined });
+        }
         mumble.removeCommand("play track");
         mumble.removeCommand("stop track");
     },
@@ -68,7 +74,7 @@ export default React.createClass({
         }
         return (
             <div>
-                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}} runOnMount={true}>
+                <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}}>
                     {trackDisplay}
                 </VelocityTransitionGroup>
             </div>

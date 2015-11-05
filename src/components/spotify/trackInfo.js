@@ -14,6 +14,9 @@ export default React.createClass({
         return (
             <div className="ui center aligned grid">
                 <div className="row">
+                    <div className="ui huge header">Now Playing</div>
+                </div>
+                <div className="row">
                     <div className="ui small circular image">
                         <img src={trackMeta.albumImage}/>
                     </div>

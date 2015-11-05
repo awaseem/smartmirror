@@ -21,12 +21,12 @@ export default React.createClass({
         });
     },
     render() {
-        var weather;
+        var test;
         if (this.state.test) {
-            weather = <Weather mumble={this.props.mumble}/>;
+            test = <Spotify mumble={this.props.mumble}/>;
         }
         else {
-            weather = undefined;
+            test = undefined;
         }
         return (
             <div className="ui fluid container">
@@ -35,17 +35,17 @@ export default React.createClass({
                         <div className="column">
                             <Time/>
                         </div>
-                        <div className="column"></div>
                         <div className="column">
-                            {weather}
+                            {test}
+                        </div>
+                        <div className="column">
+                            <Weather mumble={this.props.mumble}/>
                         </div>
                     </div>
-                    <div className="row"></div>
                     <div className="row">
                         <div className="column"></div>
                         <div className="column">
-                            <Spotify mumble={this.props.mumble}/>
-                            <Reddit/>
+                            <Reddit mumble={this.props.mumble}/>
                         </div>
                         <div className="column"></div>
                     </div>
