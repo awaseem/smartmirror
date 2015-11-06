@@ -43,10 +43,10 @@ export default React.createClass({
                         </div>
                     </div>
                     <div className="row">
+                        <div className="column"></div>
                         <div className="column">
                             <Reddit mumble={this.props.mumble}/>
                         </div>
-                        <div className="column"></div>
                         <div className="column"></div>
                     </div>
                 </div>
