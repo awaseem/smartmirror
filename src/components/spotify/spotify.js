@@ -26,10 +26,9 @@ export default React.createClass({
         mumble.addCommand("play track", "play (.+) by (.+)", (song, artist) => {
             this.spotifySearch.searchTracks(`artist:${artist} track:${song}`)
                 .then((data) => {
-                    console.log(data);
                     if (checkNested(data, "tracks", "items")) {
                         let trackMeta = data.tracks.items[0];
-                        if (!trackMeta.preview_url) {
+                        if (!trackMeta || !trackMeta.preview_url) {
                             throw "Track does not have a preview url!";
                         }
                         this.currentTrack.src = trackMeta.preview_url;
@@ -48,7 +47,7 @@ export default React.createClass({
                 });
         });
 
-        mumble.addCommand("stop track", "pause", () => {
+        mumble.addCommand("stop track", "stop track", () => {
             if (this.currentTrack) {
                 this.currentTrack.pause();
                 this.setState({ trackPlaying: undefined });

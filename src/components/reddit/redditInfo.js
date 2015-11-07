@@ -13,9 +13,6 @@ export default React.createClass({
         });
         return (
             <div className="ui grid">
-                <div className="centered row">
-                    <div className="ui large header">Reddit</div>
-                </div>
                 {redditItems}
             </div>
         );

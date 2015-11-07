@@ -19,18 +19,25 @@ export default React.createClass({
     },
 
     componentDidMount: function () {
-        setInterval(() => {
+        let id = setInterval(() => {
             this.setState({
                 time: moment().format(timeFormat),
                 date: moment().format(dateFormat)
             });
-        }, refreshInterval)
+        }, refreshInterval);
+        this.setState({
+            id: id
+        })
+    },
+
+    componentWillUnmount: function () {
+        clearInterval(this.state.id);
     },
 
     render: function () {
         return (
             <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}} runOnMount={true}>
-                <div style={{ fontSize: "84px" }} className="ui huge header">{this.state.time}</div>
+                <div style={{ fontSize: "64px" }} className="ui huge header">{this.state.time}</div>
                 <div className="ui large header">{this.state.date}</div>
             </VelocityTransitionGroup>
         );

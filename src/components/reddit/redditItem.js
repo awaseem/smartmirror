@@ -9,7 +9,6 @@ export default React.createClass({
         return (
             <div className="row">
                 <div className="ui tiny header">
-                    <img style={ { marginRight: "10px"} } src={ this.props.image } className="ui circular image"/>
                     { this.props.title }
                 </div>
             </div>

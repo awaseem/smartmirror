@@ -13,31 +13,33 @@ let POST_LIMIT = 8;
 export default React.createClass({
     reddit: new Snoocore(redditConfig),
 
-    getFrontPageReddit: function (subReddit) {
+    getFrontPageReddit: function (subReddit="worldnews") {
         // get information from the requested subreddit
-        this.reddit(subReddit ? `/r/${subReddit}/hot`: "/hot").get({ limit: POST_LIMIT})
+        this.reddit(`/r/${subReddit}/hot`).get({ limit: POST_LIMIT})
             .then((results) => {
                 this.setState({
-                    redditData: results
+                    redditData: results,
+                    redditError: false
                 })
             }).catch((error) => {
                 console.error(error);
                 this.setState({
-                    redditError: error
+                    redditError: true
                 })
             })
     },
 
     getInitialState: function () {
         return {
-            redditData: undefined
+            redditData: undefined,
+            redditError: false
         }
     },
 
     componentDidMount: function () {
         let mumble = this.props.mumble;
 
-        mumble.addCommand("reddit", "what's new (.+)", (subReddit) => {
+        mumble.addCommand("get subreddit page", "what's new (.+)", (subReddit) => {
             this.setState({
                 redditData: undefined
             });
@@ -47,6 +49,10 @@ export default React.createClass({
 
         // get the hot front page topics
         this.getFrontPageReddit();
+    },
+
+    componentWillUnmount: function () {
+        this.props.mumble.removeCommand("get subreddit page");
     },
 
     render: function () {
