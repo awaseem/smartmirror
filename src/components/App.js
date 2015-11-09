@@ -1,12 +1,29 @@
 import React from 'react';
 import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
+import Mumble from "mumble-js";
 import Time from "./time/time";
 import Weather from "./weather/weather";
 import Spotify from "./spotify/spotify";
 import Reddit from "./reddit/reddit";
+import Listener from "./listener/listener";
 
 export default React.createClass({
+    mumble: undefined,
+
+    gotMatch: function () {
+        this.setState({
+            recognizeMatch: true
+        })
+    },
+
     getInitialState() {
+        this.mumble = new Mumble({
+            language: 'en-US',
+            debug: true,
+            callbacks: {
+                recognizeMatch: this.gotMatch
+            }
+        });
         return {
             test: true
         }
@@ -22,12 +39,14 @@ export default React.createClass({
         });
     },
     componentDidMount: function () {
-        this.props.mumble.addCommand("hide", "sleep", () => {
+        this.mumble.start();
+
+        this.mumble.addCommand("hide", "sleep", () => {
             this.setState({
                 hide: true
             });
         });
-        this.props.mumble.addCommand("wake up", "wake up", () => {
+        this.mumble.addCommand("wake up", "wake up", () => {
             this.setState({
                 hide: false
             })
@@ -35,8 +54,9 @@ export default React.createClass({
     },
     render() {
         var test;
+        console.log(this.state.recognizeMatch);
         if (this.state.test) {
-            test = <Spotify mumble={this.props.mumble}/>;
+            test = <Spotify mumble={this.mumble}/>;
         }
         else {
             test = undefined;
@@ -50,19 +70,21 @@ export default React.createClass({
                                 <div className="column">
                                     <Time/>
                                 </div>
-                                <div className="column"></div>
                                 <div className="column">
-                                    <Weather mumble={this.props.mumble}/>
+                                    <Listener/>
+                                </div>
+                                <div className="column">
+                                    <Weather mumble={this.mumble}/>
                                 </div>
                             </div>
                             <div className="row"></div>
                             <div className="equal width row">
                                 <div className="column">
-                                    <Reddit mumble={this.props.mumble}/>
+                                    <Reddit mumble={this.mumble}/>
                                 </div>
                                 <div className="column"></div>
                                 <div className="column">
-                                    <Spotify mumble={this.props.mumble}/>
+                                    <Spotify mumble={this.mumble}/>
                                 </div>
                             </div>
                         </div>

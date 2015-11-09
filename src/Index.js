@@ -1,18 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import Mumble from "mumble-js";
-
-let mumble = new Mumble({
-    language: 'en-US',
-    debug: true
-});
-
-mumble.start();
+import App from './components/App';
+import { test } from "./components/listener/listenerUtils";
 
 window.React = React;
 
 ReactDOM.render(
-    <App mumble={mumble}/>
+    <App/>
     , document.getElementById('content')
 );
