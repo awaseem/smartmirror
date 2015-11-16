@@ -15,11 +15,10 @@ export default React.createClass({
         this.setState({
             recognizeMatch: data.results[0][data.resultIndex].transcript
         });
-        let intervalId = setInterval( () => {
+        setTimeout( () => {
             this.setState({
                 recognizeMatch: undefined
             });
-            clearInterval(intervalId);
         }, 2000);
     },
 
