@@ -3,26 +3,25 @@
  */
 
 import React from "react";
+import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
 
 export default React.createClass({
-    getInitialState: function () {
-        return {
-            test: false
-        };
-    },
-
-    componentDidMount: function () {
-        console.log(this.props.mumble)
-    },
-
     render: function () {
         return (
             <div>
                 <div className="ui center aligned grid">
                     <div className="row">
-                        <div className="ui huge header">Listening</div>
-                        { this.state.test ? "hello world" : undefined}
+                        <div className="ui huge header">{ this.props.match ? "Recognized Match" : "Listening" }</div>
                     </div>
+                    <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}}>
+                        {   this.props.match ?
+                            <div>
+                                <div className="row">
+                                    <div className="ui large header">{ `"${this.props.match}"` }</div>
+                                </div>
+                            </div> : undefined
+                        }
+                    </VelocityTransitionGroup>
                 </div>
             </div>
         );

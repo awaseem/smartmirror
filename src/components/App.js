@@ -10,10 +10,17 @@ import Listener from "./listener/listener";
 export default React.createClass({
     mumble: undefined,
 
-    gotMatch: function () {
+    gotMatch: function (data) {
+        console.log(data);
         this.setState({
-            recognizeMatch: true
-        })
+            recognizeMatch: data.results[0][data.resultIndex].transcript
+        });
+        let intervalId = setInterval( () => {
+            this.setState({
+                recognizeMatch: undefined
+            });
+            clearInterval(intervalId);
+        }, 2000);
     },
 
     getInitialState() {
@@ -24,19 +31,7 @@ export default React.createClass({
                 recognizeMatch: this.gotMatch
             }
         });
-        return {
-            test: true
-        }
-    },
-    returnSomething(something) {
-        //this is only for testing purposes. Check /test/components/App-test.js
-        return something;
-    },
-    turnOffWeather: function () {
-        console.log("hello");
-        this.setState({
-            test: !this.state.test
-        });
+        return {};
     },
     componentDidMount: function () {
         this.mumble.start();
@@ -53,14 +48,7 @@ export default React.createClass({
         })
     },
     render() {
-        var test;
         console.log(this.state.recognizeMatch);
-        if (this.state.test) {
-            test = <Spotify mumble={this.mumble}/>;
-        }
-        else {
-            test = undefined;
-        }
         return (
             <div>
                 <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}}>
@@ -71,7 +59,7 @@ export default React.createClass({
                                     <Time/>
                                 </div>
                                 <div className="column">
-                                    <Listener/>
+                                    <Listener match={this.state.recognizeMatch}/>
                                 </div>
                                 <div className="column">
                                     <Weather mumble={this.mumble}/>

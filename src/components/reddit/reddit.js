@@ -39,7 +39,7 @@ export default React.createClass({
     componentDidMount: function () {
         let mumble = this.props.mumble;
 
-        mumble.addCommand("get subreddit page", "what's new (.+)", (subReddit) => {
+        mumble.addCommand("get subreddit page", "what's new on (.+)", (subReddit) => {
             this.setState({
                 redditData: undefined
             });
