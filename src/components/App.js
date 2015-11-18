@@ -1,11 +1,13 @@
 import React from 'react';
 import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
 import Mumble from "mumble-js";
+import $ from "jquery";
 import Time from "./time/time";
 import Weather from "./weather/weather";
 import Spotify from "./spotify/spotify";
 import Reddit from "./reddit/reddit";
 import Listener from "./listener/listener";
+import Hue from "./hue/hue";
 
 export default React.createClass({
     mumble: undefined,
@@ -44,10 +46,12 @@ export default React.createClass({
             this.setState({
                 hide: false
             })
-        })
+        });
+
+        // Remove scroll bar from the body
+        $("body").css("overflow", "hidden");
     },
     render() {
-        console.log(this.state.recognizeMatch);
         return (
             <div>
                 <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}}>
@@ -69,7 +73,9 @@ export default React.createClass({
                                 <div className="column">
                                     <Reddit mumble={this.mumble}/>
                                 </div>
-                                <div className="column"></div>
+                                <div className="column">
+                                    <Hue mumble={this.mumble}/>
+                                </div>
                                 <div className="column">
                                     <Spotify mumble={this.mumble}/>
                                 </div>

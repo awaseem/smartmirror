@@ -33,6 +33,7 @@
     "better-console": "^0.2.4",
     "del": "^2.0.2",
     "extend": "^3.0.0",
+    "hue.js": "^0.2.13",
     "jquery": "^2.1.4",
     "map-stream": "0.0.6",
     "moment": "^2.10.6",

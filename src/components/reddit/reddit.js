@@ -47,7 +47,7 @@ export default React.createClass({
             this.getFrontPageReddit(subReddit.replace(/ /g,''));
         });
 
-        // get the hot front page topics
+        // get the hot world news page topics
         this.getFrontPageReddit();
     },
 
