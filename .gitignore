@@ -31,3 +31,4 @@ dist
 playbox
 .DS_Store
 config
+*.pem

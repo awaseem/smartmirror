@@ -32,6 +32,7 @@
   "dependencies": {
     "better-console": "^0.2.4",
     "del": "^2.0.2",
+    "express": "^4.13.3",
     "extend": "^3.0.0",
     "hue.js": "^0.2.13",
     "jquery": "^2.1.4",
