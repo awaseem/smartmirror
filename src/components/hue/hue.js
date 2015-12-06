@@ -12,7 +12,7 @@ export default React.createClass({
         this.user = this.bridge.user(hueConfig.bridgeUser);
         return {
             lightState: undefined
-        }
+        };
     },
     componentDidMount: function () {
         let mumble = this.props.mumble;
@@ -36,20 +36,20 @@ export default React.createClass({
                     break;
                 default:
                     // If no matches the trigger and error and set the lights color to undefined
-                    error("no light color found")
+                    error("no light color found");
             }
             let self = this;
             // Call back function for the handling of our color states
             function success() {
                 self.setState({
                     lightState: color
-                })
+                });
             }
             function error(err) {
                 console.error(err);
                 self.setState({
                     lightState: undefined
-                })
+                });
             }
         });
 
@@ -63,11 +63,11 @@ export default React.createClass({
 
         mumble.addCommand("light dim", "lower lights", () => {
             this.user.setGroupState(hueConfig.groupId, { on: true, bri: 50}, function (data) {}, function (err) {});
-        })
+        });
     },
     render: function () {
         return (
             <div></div>
-        )
+        );
     }
 });

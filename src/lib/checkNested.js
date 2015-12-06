@@ -12,4 +12,4 @@ export default function checkNested(obj /*, level1, level2, ... levelN*/) {
         obj = obj[args[i]];
     }
     return true;
-};
+}

@@ -15,7 +15,7 @@ export default React.createClass({
         return {
             time: moment().format(timeFormat),
             date: moment().format(dateFormat)
-        }
+        };
     },
 
     componentDidMount: function () {
@@ -27,7 +27,7 @@ export default React.createClass({
         }, refreshInterval);
         this.setState({
             id: id
-        })
+        });
     },
 
     componentWillUnmount: function () {

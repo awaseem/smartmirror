@@ -45,7 +45,7 @@ export default React.createClass({
         this.mumble.addCommand("wake up", "wake up", () => {
             this.setState({
                 hide: false
-            })
+            });
         });
 
         // Remove scroll bar from the body
@@ -84,6 +84,6 @@ export default React.createClass({
                     </div> : undefined }
                 </VelocityTransitionGroup>
             </div>
-        )
+        );
     }
 });

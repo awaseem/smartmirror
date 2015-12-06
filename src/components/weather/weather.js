@@ -13,7 +13,7 @@ export default React.createClass({
     getInitialState: function () {
         return {
             weatherError: false
-        }
+        };
     },
 
     createWeatherQuery: function (city) {
@@ -34,14 +34,15 @@ export default React.createClass({
                 console.error(error);
                 this.setState({
                     weatherError: true
-                })
-            })
+                });
+            });
     },
 
     componentDidMount: function () {
         // Add voice actions for mumble
         this.props.mumble.addCommand("weather", "Show me weather for (.+)", (city) => {
             this.getWeatherForCity(city);
+            $("#weather-test").transition("jiggle");
         });
 
         // Initial load should get the weather for my city
@@ -61,7 +62,7 @@ export default React.createClass({
                     { weatherData ? <WeatherInfo forecast={ weatherData.item.forecast }
                                                  conditionCode={ weatherData.item.condition.code }
                                                  temp={ weatherData.item.condition.temp }
-                                                 city={ weatherData.location.city }/> : undefined }
+                                                 city={ weatherData.location.city }/>: undefined }
                 </VelocityTransitionGroup>
 
                 <VelocityTransitionGroup enter={{animation: "fadeIn"}} leave={{animation: "fadeOut"}}>

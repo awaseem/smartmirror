@@ -14,7 +14,7 @@ export default React.createClass({
                              code={ data.code || "N/A" }/>;
         });
         return (
-            <div className="ui center aligned grid">
+            <div id="weather-test" className="ui center aligned grid">
                 <div className="two column row">
                     <div className="column">
                         <i style={{fontSize: "56px"}} className={ this.props.conditionCode ? `wi wi-yahoo-${ this.props.conditionCode }` : `wi wi-na`}></i>

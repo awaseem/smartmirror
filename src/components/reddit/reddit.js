@@ -20,20 +20,20 @@ export default React.createClass({
                 this.setState({
                     redditData: results,
                     redditError: false
-                })
+                });
             }).catch((error) => {
                 console.error(error);
                 this.setState({
                     redditError: true
-                })
-            })
+                });
+            });
     },
 
     getInitialState: function () {
         return {
             redditData: undefined,
             redditError: false
-        }
+        };
     },
 
     componentDidMount: function () {
@@ -68,4 +68,3 @@ export default React.createClass({
         );
     }
 });
-
