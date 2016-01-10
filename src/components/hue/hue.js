@@ -6,14 +6,28 @@ import React from "react";
 import hueConfig from "../../config/hueConfig";
 
 export default React.createClass({
+
     getInitialState: function () {
         this.hue = jsHue();
-        this.bridge = this.hue.bridge(hueConfig.bridgeIP);
-        this.user = this.bridge.user(hueConfig.bridgeUser);
+        this.hue.discover((bridges) => {
+            let bridgeInfo = bridges.pop();
+            if (bridgeInfo) {
+                this.bridge = this.hue.bridge(bridgeInfo.internalipaddress);
+                // Currently we have to make sure a user is already defined for the light comp to work
+                // will need to change this in the future
+                this.user = this.bridge.user(hueConfig.bridgeUser);
+            }
+            else {
+                throw "No hue bridge for smart mirror";
+            }
+        }, (error) => {
+            console.error(error);
+        });
         return {
             lightState: undefined
         };
     },
+
     componentDidMount: function () {
         let mumble = this.props.mumble;
         // All possible color states for the smartmirror
@@ -65,6 +79,14 @@ export default React.createClass({
             this.user.setGroupState(hueConfig.groupId, { on: true, bri: 50}, function (data) {}, function (err) {});
         });
     },
+
+    componentWillUnmount: function () {
+        this.props.mumble.removeCommand("light color control");
+        this.props.mumble.removeCommand("lights off");
+        this.props.mumble.removeCommand("lights on");
+        this.props.mumble.removeCommand("light dim");
+    },
+
     render: function () {
         return (
             <div></div>

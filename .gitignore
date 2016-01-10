@@ -30,5 +30,5 @@ node_modules
 dist
 playbox
 .DS_Store
-config
+redditConfig.js
 *.pem

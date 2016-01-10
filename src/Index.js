@@ -7,6 +7,5 @@ import { test } from "./components/listener/listenerUtils";
 window.React = React;
 
 ReactDOM.render(
-    <App/>
-    , document.getElementById('content')
+    <App/>, document.getElementById('content')
 );
