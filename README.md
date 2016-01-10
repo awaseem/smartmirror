@@ -71,3 +71,5 @@ Yes 100%, this does not need to change!!!!
 ### Whats going on with https and hue?
 
 Lets just say that hue does not have an api that interfaces with https, you can just load the unsafe scripts (bad hack) or enable the flag in chromium 
+
+still developing....
