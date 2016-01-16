@@ -12,8 +12,6 @@ let POST_LIMIT = 8;
 
 export default React.createClass({
 
-    reddit: new Snoocore(redditConfig),
-
     getFrontPageReddit: function (subReddit="worldnews") {
         // get information from the requested subreddit
         this.reddit(`/r/${subReddit}/hot`).get({ limit: POST_LIMIT})
@@ -38,6 +36,17 @@ export default React.createClass({
     },
 
     componentDidMount: function () {
+
+        if (redditConfig.userAgent) {
+            this.reddit = new Snoocore(redditConfig);
+        }
+        else {
+            console.error("Seems like the reddit config is empty!");
+            return this.setState({
+                redditError: true
+            });
+        }
+
         let mumble = this.props.mumble;
 
         mumble.addCommand("get subreddit page", "what's new on (.+)", (subReddit) => {
@@ -68,5 +77,5 @@ export default React.createClass({
             </div>
         );
     }
-    
+
 });
