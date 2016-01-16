@@ -5,6 +5,7 @@
 import React from "react";
 
 export default React.createClass({
+
     render: function () {
         return (
             <div className="row">
@@ -14,4 +15,5 @@ export default React.createClass({
             </div>
         );
     }
+    
 });

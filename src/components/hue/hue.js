@@ -7,15 +7,29 @@ import hueConfig from "../../config/hueConfig";
 
 export default React.createClass({
 
-    getInitialState: function () {
+    connectToHue: function () {
         this.hue = jsHue();
         this.hue.discover((bridges) => {
             let bridgeInfo = bridges.pop();
             if (bridgeInfo) {
                 this.bridge = this.hue.bridge(bridgeInfo.internalipaddress);
-                // Currently we have to make sure a user is already defined for the light comp to work
-                // will need to change this in the future
-                this.user = this.bridge.user(hueConfig.bridgeUser);
+                if (localStorage.getItem("smartMirrorHueUser")) {
+                    this.user = this.bridge.user(localStorage.getItem("smartMirrorHueUser"));
+                }
+                else {
+                    this.bridge.createUser('smart mirror hue user', (data) => {
+                        // extract bridge-generated username from returned data
+                        if (data[0].error) {
+                            this.setState({ errorMessage: `${data[0].error.description}, Please press link button and refresh page!` });
+                        }
+                        else {
+                            let username = data[0].success.username;
+                            console.log(username);
+                            localStorage.setItem("smartMirrorHueUser", username);
+                            this.user = this.bridge.user(username);
+                        }
+                    });
+                }
             }
             else {
                 throw "No hue bridge for smart mirror";
@@ -23,14 +37,21 @@ export default React.createClass({
         }, (error) => {
             console.error(error);
         });
+    },
+
+    getInitialState: function () {
         return {
-            lightState: undefined
+            lightState: undefined,
+            errorMessage: ""
         };
     },
 
     componentDidMount: function () {
+        // Connect to Hue for light connection
+        this.connectToHue();
+
+        // Setup all possible color states for the smartmirror and voice commands for the philips hue
         let mumble = this.props.mumble;
-        // All possible color states for the smartmirror
         mumble.addCommand("light color control", "change lights to (.+)", (color) => {
             switch (color.toLowerCase()) {
                 case "red":
@@ -53,7 +74,7 @@ export default React.createClass({
                     error("no light color found");
             }
             let self = this;
-            // Call back function for the handling of our color states
+            // Call back functions for the handling of our color states
             function success() {
                 self.setState({
                     lightState: color
@@ -89,7 +110,7 @@ export default React.createClass({
 
     render: function () {
         return (
-            <div></div>
+            <div>{ this.state.errorMessage ? <h1 className="ui center aligned header">{ this.state.errorMessage }</h1> : <noscript/> }</div>
         );
     }
 });

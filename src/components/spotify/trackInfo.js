@@ -5,6 +5,7 @@
 import React from "react";
 
 export default React.createClass({
+
     render: function () {
         let trackMeta = {
             song: this.props.trackMeta.name,
@@ -30,4 +31,5 @@ export default React.createClass({
             </div>
         );
     }
+    
 });

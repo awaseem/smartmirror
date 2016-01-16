@@ -6,6 +6,7 @@ import React from "react";
 import VelocityTransitionGroup from "velocity-react/velocity-transition-group";
 
 export default React.createClass({
+
     render: function () {
         return (
             <div>
@@ -26,4 +27,5 @@ export default React.createClass({
             </div>
         );
     }
+    
 });

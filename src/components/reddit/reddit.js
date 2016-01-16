@@ -11,6 +11,7 @@ import redditConfig from "../../config/redditConfig";
 let POST_LIMIT = 8;
 
 export default React.createClass({
+
     reddit: new Snoocore(redditConfig),
 
     getFrontPageReddit: function (subReddit="worldnews") {
@@ -67,4 +68,5 @@ export default React.createClass({
             </div>
         );
     }
+    
 });

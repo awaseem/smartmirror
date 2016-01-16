@@ -3,7 +3,6 @@
  */
 
 export default {
-    bridgeUser: "1bced2662f3595643baf3cb284cf4df",
     groupId: 0,
     normal: { on: true, hue: 13088, bri: 254, sat: 254 },
     red: { on: true, hue: 65535, bri: 254, sat: 254 },

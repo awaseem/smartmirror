@@ -34,6 +34,7 @@ export default React.createClass({
         });
         return {};
     },
+
     componentDidMount: function () {
         this.mumble.start();
 
@@ -51,6 +52,7 @@ export default React.createClass({
         // Remove scroll bar from the body
         $("body").css("overflow", "hidden");
     },
+    
     render() {
         return (
             <div>
