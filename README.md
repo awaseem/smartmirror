@@ -22,15 +22,6 @@ export default {
 };
 ```
 
-### Hue
-You'll have to add a proper valid user to interact with the hue bridge, just replace the following you're unique user id
-
-```
-...
-bridgeUser: "1bced2662f3595643baf3cb284cf4df",
-...
-```
-
 ## Install
 
 Just run the following commands
@@ -50,15 +41,17 @@ To run in production, you'll have to generate a self signed cert and point them 
 ```
 ...
 https.createServer({
-        key: fs.readFileSync("PATH/TO/KEY.PEM"),
+    key: fs.readFileSync("PATH/TO/KEY.PEM"),
     cert: fs.readFileSync("PATH/TO/CERT.PEM")
 }, app).listen(3000);
 ...
 ```
 
-Once thats done just run the following command:
+Once thats done just run the following commands:
 
 ```
+gulp build
+
 node app.js
 ```
 

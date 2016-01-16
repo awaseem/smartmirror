@@ -28,6 +28,7 @@ export default React.createClass({
         this.mumble = new Mumble({
             language: 'en-US',
             debug: true,
+            continuous: false,
             callbacks: {
                 recognizeMatch: this.gotMatch
             }
@@ -52,7 +53,7 @@ export default React.createClass({
         // Remove scroll bar from the body
         $("body").css("overflow", "hidden");
     },
-    
+
     render() {
         return (
             <div>
@@ -82,7 +83,9 @@ export default React.createClass({
                                     <Spotify mumble={this.mumble}/>
                                 </div>
                             </div>
+                            <div className="row"></div>
                         </div>
+                        <h1 style={{ position: "fixed", bottom: "800px", right: "0", left: "0"}} className="ui center aligned huge header">Enjoy your day!</h1>
                     </div> : undefined }
                 </VelocityTransitionGroup>
             </div>
