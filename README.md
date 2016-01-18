@@ -65,4 +65,8 @@ Yes 100%, this does need to change!!!!
 
 Lets just say that hue doesn't have an api that interfaces with https, you can just load the unsafe scripts (bad hack) or enable the flag in chromium
 
+## Credit
+
+Saw Evan Cohens smart mirror on reddit and decided to make my own with React.js (he used angular). Check his project out and give him some [love](https://github.com/evancohen/smart-mirror)
+
 still developing....
