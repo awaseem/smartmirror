@@ -1,5 +1,7 @@
 # Smart Mirror
 
+## [Check out the example!](https://www.facebook.com/ali.waseem.311/videos/10153932144464744/?l=882654636821647915)
+
 ## Config Files
 
 ### Reddit
